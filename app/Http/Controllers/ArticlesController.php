@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller {
     
@@ -26,9 +27,8 @@ class ArticlesController extends Controller {
         return view('articles.index', compact('articles'));
     }
  
-    public function show($id) {
-        $article = Article::findOrFail($id);
- 
+    public function show(Article $article) {
+
         return view('articles.show', compact('article'));
     }
 
@@ -47,15 +47,12 @@ class ArticlesController extends Controller {
         ->with('message', '記事を追加しました。');
     }
 
-    public function edit($id){
-        $article = Article::findOrFail($id);
+    public function edit(Article $article){
 
         return view('articles.edit', compact('article'));
     }
 
-    public function update(ArticleRequest $request, $id){
-        $article = Article::findOrFail($id);
-
+    public function update(ArticleRequest $request, Article $article){
         $article->update($request->validated());
 
         // return redirect(url('articles', [$article->id]))
@@ -63,12 +60,11 @@ class ArticlesController extends Controller {
         ->with('message', '記事を更新しました。');
     }
 
-    public function destroy($id){
-        $article =Article::findOrFail($id);
-
+    public function destroy(Article $article){
         $article->delete();
 
-        return redirect('articles')->with('message', '記事を削除しました。');
+        return redirect() ->route('articles.index')
+        ->with('message', '記事を削除しました。');
     }
 
 }
