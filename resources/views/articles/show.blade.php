@@ -11,15 +11,17 @@
 
 </br>
 <div>
-    <a href="{{ action('ArticlesController@edit', [$article->id])}}"
-        class="btn btn-primary"
-        >
-        編集
-    </a>
+    @auth
+        <a href="{{ action('ArticlesController@edit', [$article->id])}}"
+            class="btn btn-primary"
+            >
+            編集
+        </a>
 
-    {!! delete_form(['articles', $article->id]) !!}
+        {!! delete_form(['articles', $article->id]) !!}
+    @endauth
 
-    <a href="{{ action('ArticlesController@index')}}"
+    <a href="{{route('articles.index')}}"
         class="btn btn-secondary float-right"
         >
         一覧へ戻る

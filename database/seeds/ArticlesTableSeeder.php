@@ -8,7 +8,9 @@ class ArticlesTableSeeder extends Seeder
     public function run()
     {
         DB::table('articles')->delete();
- 
-        factory(App\Article::class, 20)->create(); // ①
+        $user = App\User::first();
+        factory(App\Article::class, 20)->create([
+            'user_id' => $user->id,
+        ]); // ①
     }
 }

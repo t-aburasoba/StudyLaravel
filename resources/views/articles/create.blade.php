@@ -5,18 +5,11 @@
  
     <hr/>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('errors.form_errors')
  
-    {!! Form::open(['url' => 'articles']) !!}
-        <div class="form-group">
+    {{-- {!! Form::open(['url' => 'articles']) !!} --}}
+    {!! Form::open(['route' => 'articles.store']) !!}
+        {{-- <div class="form-group">
             {!! Form::label('title', 'Title:') !!}
             {!! Form::text('title', null, ['class' => 'form-control']) !!}
         </div>
@@ -30,6 +23,8 @@
         </div>    
         <div class="form-group">
             {!! Form::submit('Add Article', ['class' => 'btn btn-primary form-control']) !!}
-        </div>
+        </div> --}}
+
+        @include('articles.form', ['published_at' => date('Y-m-d'), 'submitButton' =>'Add Article'])
     {!! Form::close() !!}
 @endsection
