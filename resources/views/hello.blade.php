@@ -15,6 +15,7 @@
     <form action="/hello" method="POST">
         @csrf
         <input type="text" name="msg">
+        <input type="text" name="msg2">
         <input type="submit">
     </form>
 </body>

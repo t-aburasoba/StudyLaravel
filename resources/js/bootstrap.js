@@ -39,19 +39,3 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
-
-import moment from 'moment';
-window.moment = moment;
-
-require('tempusdominus-bootstrap-4');
-$(function () {
-    $('#datetimepicker12').datetimepicker({
-        format: "YYYY-MM-DD",
-        locale: 'ja',
-        inline: true,
-        sideBySide: true
-    });
-    $("#datetimepicker12").on("change.datetimepicker", function (e) {
-        $("#input-date").val(e.date.format('YYYY-MM-DD'));
-    });
-});

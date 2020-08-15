@@ -17,9 +17,10 @@ class HelloController extends Controller
         return view('test', compact('id'));
     }
 
-    public function post(HelloRequest $request)
+    public function post(Request $request)
     {
-        $msg = $request->msg;
-        return view('msg', compact('msg'));
+        $msg  = $request->msg;
+        $msg2 = $request->msg2;
+        return view('msg', compact('msg', 'msg2'));
     }
 }

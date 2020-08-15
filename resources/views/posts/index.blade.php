@@ -2,28 +2,6 @@
 
 @section('content')
 <div class="container">
-    {{-- <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <form class="form-inline">
-                    <label for="due_date-field">日付</label>
-                    <div style="overflow:hidden;">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-12">
-                                    <input type="text" id="input-date" name="date">
-                                </div>
-                                <div class="col-12">
-                                    <div id="datetimepicker12"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="submit" value="検索">
-                </form>
-            </div>
-        </div>
-    </div> --}}
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card text-center">
@@ -37,24 +15,9 @@
                     <p class="card-text">投稿者：{{ $post->user->name }}</p>
                     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">詳細へ</a>
                     <div class="row justify-content-center">
-                        @if($post->users()->where('user_id', Auth::id())->exists())
-                        <div class="col-md-3">
-                            <form action="{{ route('unfavorites', $post) }}" method="POST">
-                                @csrf
-                                <input type="submit" value="&#xf164;いいね取り消す" class="fas btn btn-danger">
-                            </form>
-                        </div>
-                        @else
-                        <div class="col-md-3">
-                            <form action="{{ route('favorites', $post) }}" method="POST">
-                                @csrf
-                                <input type="submit" value="&#xf164;いいね" class="fas btn btn-success">
-                            </form>
-                        </div>
-                        @endif
-                    </div>
-                    <div class="row justify-content-center">
-                        <p>いいね数：{{ $post->users()->count() }}</p>
+                        <like-component
+                            :post="{{ json_encode($post)}}"
+                        ></like-component>
                     </div>
                 </div>
                 <div class="card-footer text-muted">
