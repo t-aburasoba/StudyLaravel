@@ -18,9 +18,7 @@
 
 <script>
     export default {
-        props: {
-            post: {required:true},
-        },
+        props: ['post'],
         data() {
             return {
                 count: "",
@@ -33,42 +31,38 @@
         },
         methods: {
             favorite() {
-                try {
-                    axios.get('/posts/' + this.post.id +'/favorites');
-                        this.countfavorites();
-                        this.hasfavorites();
-                } catch (e) {
-                    console.error(e)
-                }
+                axios.get('/posts/' + this.post.id +'/favorites')
+                .then(res => {
+                    this.result = res.data.result;
+                    this.count = res.data.count;
+                }).catch(function(error) {
+                    console.log(error);
+                });
             },
             unfavorite() {
-                try {
-                    axios.get('/posts/' + this.post.id +'/unfavorites');
-                        this.countfavorites();
-                        this.hasfavorites();
-                } catch (e) {
-                    console.error(e)
-                }
+                axios.get('/posts/' + this.post.id +'/unfavorites')
+                .then(res => {
+                    this.result = res.data.result;
+                    this.count = res.data.count;
+                }).catch(function(error){
+                    console.log(error);
+                });
             },
             countfavorites() {
-                try {
-                    axios.get('/posts/' + this.post.id +'/countfavorites')
-                        .then(res => {
-                            this.count = res.data;
-                        });
-                } catch (e) {
-                    console.error(e)
-                }
+                axios.get('/posts/' + this.post.id +'/countfavorites')
+                .then(res => {
+                    this.count = res.data;
+                }).catch(function(error){
+                    console.log(error);
+                });
             },
             hasfavorites() {
-                try {
-                    axios.get('/posts/' + this.post.id +'/hasfavorites')
-                        .then(res => {
-                            this.result = res.data;
-                        });
-                } catch (e) {
-                    console.error(e)
-                }
+                axios.get('/posts/' + this.post.id +'/hasfavorites')
+                .then(res => {
+                    this.result = res.data;
+                }).catch(function(error){
+                    console.log(error);
+                });
             }
         }
     }

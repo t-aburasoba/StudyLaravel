@@ -38,6 +38,12 @@ class FavoriteController extends Controller
     {
         $post = Post::find($id);
         $post->users()->attach(Auth::id());
+        $count = $post->users()->count();
+        $result = true;
+        return response()->json([
+            'result' => $result, 
+            'count' => $count, 
+        ]);
     }
 
     /**
@@ -84,6 +90,12 @@ class FavoriteController extends Controller
     {
         $post = Post::find($id);
         $post->users()->detach(Auth::id());
+        $count = $post->users()->count();
+        $result = false;
+        return response()->json([
+            'result' => $result, 
+            'count' => $count, 
+        ]);
     }
 
     public function count ($id)
